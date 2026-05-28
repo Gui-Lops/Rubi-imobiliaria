@@ -1,28 +1,35 @@
 {% extends 'loja/base.html' %}
 
 {% block content %}
-<div class="container" style="max-width:640px;margin:80px auto;">
-    <h2>Registre-se</h2>
-    <form method="post" class="auth-form">
-        {% csrf_token %}
-        {% if form.errors %}
-            <div class="form-errors">
-                {% for field in form %}
-                    {% for error in field.errors %}
+<section class="auth-page">
+    <div class="container auth-panel auth-panel--reverse">
+        <div class="auth-panel__preview">
+            <span class="auth-pill">Cadastro</span>
+            <h1>Crie sua conta</h1>
+            <p>Preencha os dados abaixo para começar a explorar oportunidades de imóveis com a RubiHaus.</p>
+        </div>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="form-errors">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-        <div class="form-row">{{ form.username.label_tag }} {{ form.username }}</div>
-        <div class="form-row">{{ form.email.label_tag }} {{ form.email }}</div>
-        <div class="form-row">{{ form.password1.label_tag }} {{ form.password1 }}</div>
-        <div class="form-row">{{ form.password2.label_tag }} {{ form.password2 }}</div>
-        <div class="form-row">{{ form.admin_code.label_tag }} {{ form.admin_code }}</div>
-        <div class="form-actions"><button class="btn-primary" type="submit">Criar conta</button></div>
-    </form>
-</div>
+                </div>
+            {% endif %}
+            <div class="form-row">{{ form.username.label_tag }}{{ form.username }}</div>
+            <div class="form-row">{{ form.email.label_tag }}{{ form.email }}</div>
+            <div class="form-row">{{ form.password1.label_tag }}{{ form.password1 }}</div>
+            <div class="form-row">{{ form.password2.label_tag }}{{ form.password2 }}</div>
+            <div class="form-actions"><button class="btn-primary" type="submit">Criar conta</button></div>
+            <p class="form-help">Já tem conta? <a href="{% url 'login' %}">Faça login</a></p>
+        </form>
+    </div>
+</section>
 {% endblock %}

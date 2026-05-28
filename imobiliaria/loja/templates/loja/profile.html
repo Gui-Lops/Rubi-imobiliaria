@@ -1,10 +1,45 @@
 {% extends 'loja/base.html' %}
 
 {% block content %}
-<div class="container" style="margin:80px auto;max-width:720px;">
-    <h2>Meu Perfil</h2>
-    <p>Usuário: {{ request.user.username }}</p>
-    <p>Email: {{ request.user.email }}</p>
-    <p>Admin: {{ request.user.is_staff }}</p>
-</div>
+<section class="profile-page">
+    <div class="container profile-wrapper">
+        <div class="profile-header">
+            <div class="profile-badge">Perfil</div>
+            <h1>Olá, {{ request.user.first_name|default:request.user.username }}</h1>
+            <p>Veja as informações da sua conta de forma simples e elegante.</p>
+        </div>
+
+        <div class="profile-card">
+            <div class="profile-card__summary">
+                <div class="profile-avatar">
+                    {{ request.user.username|slice:":1"|upper }}
+                </div>
+                <div>
+                    <p class="profile-role">Usuário registrado</p>
+                    <h2>{{ request.user.get_full_name|default:request.user.username }}</h2>
+                    <p class="profile-email">{{ request.user.email|default:"Sem e-mail cadastrado" }}</p>
+                </div>
+            </div>
+
+            <div class="profile-details">
+                <div class="detail-item">
+                    <span class="label">Nome de usuário</span>
+                    <strong>{{ request.user.username }}</strong>
+                </div>
+                <div class="detail-item">
+                    <span class="label">E-mail</span>
+                    <strong>{{ request.user.email|default:"Não informado" }}</strong>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Conta</span>
+                    <strong>{% if request.user.is_staff %}Administrador{% else %}Cliente{% endif %}</strong>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Status</span>
+                    <strong>{% if request.user.is_active %}Ativa{% else %}Inativa{% endif %}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

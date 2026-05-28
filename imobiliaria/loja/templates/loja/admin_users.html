@@ -1,0 +1,52 @@
+{% extends 'loja/base.html' %}
+
+{% block content %}
+<section class="admin-page">
+    <div class="container" style="max-width:1080px;margin:100px auto;">
+        <header class="section-header">
+            <p class="section-subtitle">Gestão de usuários</p>
+            <h1>Usuários cadastrados</h1>
+            <p class="section-description">Ative, promova ou remova usuários com segurança. O seu próprio usuário não pode ser alterado aqui.</p>
+        </header>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{% if user.is_staff %}Administrador{% else %}Cliente{% endif %}</td>
+                    <td>
+                        <span class="admin-badge {% if user.is_active %}active{% else %}inactive{% endif %}">
+                            {% if user.is_active %}Ativo{% else %}Inativo{% endif %}
+                        </span>
+                    </td>
+                    <td>
+                        <form method="post" style="display:inline-flex; gap:10px; align-items:center;">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <button type="submit" name="action" value="toggle_active" class="btn btn-admin">Toggle ativo</button>
+                            <button type="submit" name="action" value="toggle_staff" class="btn btn-admin">Toggle admin</button>
+                            <button type="submit" name="action" value="delete_user" class="btn btn-admin">Remover</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nenhum usuário encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
