@@ -1,0 +1,10 @@
+{% extends 'loja/base.html' %}
+
+{% block content %}
+<div class="container" style="margin:80px auto;max-width:720px;">
+    <h2>Meu Perfil</h2>
+    <p>Usuário: {{ request.user.username }}</p>
+    <p>Email: {{ request.user.email }}</p>
+    <p>Admin: {{ request.user.is_staff }}</p>
+</div>
+{% endblock %}

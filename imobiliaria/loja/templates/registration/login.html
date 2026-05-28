@@ -1,0 +1,30 @@
+{% extends 'loja/base.html' %}
+
+{% block content %}
+<div class="container" style="max-width:520px;margin:120px auto;">
+    <h2>Login</h2>
+    {% if messages %}
+        <div style="margin-bottom:16px; color:#b91c1c;">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div style="margin-bottom:12px;color:#b91c1c;">{{ form.non_field_errors }}</div>
+        {% endif %}
+        <div style="margin-bottom:12px">
+            <label>Username</label>
+            <input type="text" name="username" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)">
+        </div>
+        <div style="margin-bottom:12px">
+            <label>Senha</label>
+            <input type="password" name="password" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)">
+        </div>
+        <div style="text-align:right"><button class="btn-primary" type="submit">Entrar</button></div>
+    </form>
+    <p style="margin-top:12px">Não tem conta? <a href="{% url 'register' %}">Registre-se</a></p>
+</div>
+{% endblock %}

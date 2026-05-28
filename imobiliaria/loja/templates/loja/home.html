@@ -1,0 +1,138 @@
+{% extends 'loja/base.html' %}
+
+{% block content %}
+<section id="inicio" class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <p class="hero-subtitle">Bem Vindo ao</p>
+        <h1>Exclusivo!</h1>
+        <p class="hero-description">Imóveis de alto padrão e luxo selecionados para você</p>
+        <a href="#imoveis" class="btn btn-primary">Explorar Imóveis</a>
+    </div>
+</section>
+
+<section id="filtros" class="filters-section">
+    <div class="container">
+        <h2>Filtros Avançados</h2>
+        <p>Encontre exatamente o que procura</p>
+
+        <div class="filter-type-cards">
+            <div class="filter-card"><div class="icon">🏢</div><div>Apartamento</div></div>
+            <div class="filter-card"><div class="icon">🏙️</div><div>Cobertura</div></div>
+            <div class="filter-card"><div class="icon">🏠</div><div>Casa</div></div>
+            <div class="filter-card"><div class="icon">🌳</div><div>Área</div></div>
+        </div>
+
+        <div class="filters-panel">
+            <div class="row">
+                <div class="input"> <label>Quartos</label> <input class="input" placeholder="Todos"> </div>
+                <div class="input"> <label>Faixa de Preço</label> <input class="input" placeholder="Todas"> </div>
+                <div class="input"> <label>Área Mínima</label> <input class="input" placeholder="Todas"> </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="imoveis" class="feature-section">
+    <div class="container">
+        <h2>Imóveis em destaque</h2>
+        <p>Seleção exclusiva dos melhores imóveis disponíveis</p>
+        <div class="cards-grid">
+            <article class="property-card">
+                <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80')">
+                    <span class="badge">⭐ Destaque</span>
+                    <span class="category-pill">Casa</span>
+                </div>
+                <div class="property-body">
+                    <div class="property-title">Casa Moderna em Condomínio Fechado</div>
+                    <div class="property-meta">Alphaville, Barueri - SP</div>
+                    <div class="property-cta"><button class="btn-primary">Faça login para visualizar o preço</button></div>
+                </div>
+            </article>
+            <article class="property-card">
+                <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1560185127-6b4d1f3be3c5?auto=format&fit=crop&w=1200&q=80')">
+                    <span class="badge">⭐ Destaque</span>
+                    <span class="category-pill">Apartamento</span>
+                </div>
+                <div class="property-body">
+                    <div class="property-title">Apartamento de Luxo com Vista Panorâmica</div>
+                    <div class="property-meta">Moema, São Paulo - SP</div>
+                    <div class="property-cta"><button class="btn-primary">Faça login para visualizar o preço</button></div>
+                </div>
+            </article>
+            <article class="property-card">
+                <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80')">
+                    <span class="badge">⭐ Destaque</span>
+                    <span class="category-pill">Cobertura</span>
+                </div>
+                <div class="property-body">
+                    <div class="property-title">Cobertura Duplex Premium</div>
+                    <div class="property-meta">Jardins, São Paulo - SP</div>
+                    <div class="property-cta"><button class="btn-primary">Faça login para visualizar o preço</button></div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="agente" class="agent-section">
+    <div class="container">
+        <div class="agent-row">
+            <div class="agent-card">
+                <div style="display:flex;gap:18px;align-items:center">
+                    <div class="agent-avatar">AA</div>
+                    <div>
+                        <h3 style="margin:0;font-family: Georgia, serif; font-size:2rem">Adriana Alves</h3>
+                        <div style="color:var(--text-muted); margin-top:6px">CRECI: SP 325617F</div>
+                    </div>
+                </div>
+                <p style="margin-top:18px">Especialista em imóveis de alto padrão com mais de 15 anos de experiência no mercado imobiliário de luxo. Dedicação exclusiva para encontrar o imóvel perfeito para você.</p>
+                <a class="whatsapp-btn" href="#">Fale comigo no WhatsApp</a>
+                <hr style="margin:22px 0;border:none;border-top:1px solid rgba(15,23,32,0.04)">
+                <h4>Aviso Jurídico</h4>
+                <p>Todas as informações e valores apresentados são de responsabilidade dos proprietários e/ou anunciantes. As fotos são meramente ilustrativas. Este profissional está devidamente registrado no Conselho Regional de Corretores de Imóveis (CRECI) e atua em conformidade com a legislação vigente.</p>
+            </div>
+            <div class="qr-card">
+                <h3>Escaneie o QR Code</h3>
+                <p>Acesse meu contato rapidamente</p>
+                <div style="margin-top:18px;padding:24px;border-radius:12px;background:#f7f7f8;display:flex;align-items:center;justify-content:center">
+                    <div style="width:140px;height:140px;border-radius:12px;background:linear-gradient(180deg,#ffecec,#ffdede);display:flex;align-items:center;justify-content:center;color:#de1212;font-weight:700">QR Code<br>WhatsApp</div>
+                </div>
+                <p style="margin-top:14px;color:var(--text-muted)">Aponte a câmera do seu celular para iniciar uma conversa no WhatsApp</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="preferencias" class="contact-pref-section">
+    <div class="container">
+        <h2 style="text-align:center">Preferências de Contato</h2>
+        <p style="text-align:center">Escolha como prefere ser contactado e entraremos em contato em breve</p>
+        <div class="contact-pref-wrap">
+            <div class="form-card">
+                <label>Nome Completo *</label>
+                <input type="text" placeholder="Seu nome completo">
+                <div style="display:flex;gap:18px">
+                    <div style="flex:1">
+                        <label>E-mail *</label>
+                        <input type="email" placeholder="seu@email.com">
+                    </div>
+                    <div style="flex:1">
+                        <label>Telefone / WhatsApp *</label>
+                        <input type="text" placeholder="(11) 99999-9999">
+                    </div>
+                </div>
+                <label style="margin-top:8px">Como prefere ser contactado? *</label>
+                <div class="pref-option"><input type="checkbox"> <div><strong>Prefiro contato via WhatsApp</strong><div style="color:rgba(255,255,255,0.7)">Resposta rápida e conveniente</div></div></div>
+                <div class="pref-option"><input type="checkbox"> <div><strong>Prefiro Ligação Telefônica</strong><div style="color:rgba(255,255,255,0.7)">Conversa direta e pessoal</div></div></div>
+                <div class="pref-option"><input type="checkbox"> <div><strong>Prefiro E-mail</strong><div style="color:rgba(255,255,255,0.7)">Comunicação formal e detalhada</div></div></div>
+                <label>Mensagem (Opcional)</label>
+                <textarea style="width:100%;min-height:110px;border-radius:12px;padding:12px;border:none"></textarea>
+                <div style="text-align:right;margin-top:18px"><button class="btn-primary">Enviar solicitação</button></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
