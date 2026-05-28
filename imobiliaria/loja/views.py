@@ -4,7 +4,9 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.urls import reverse
-from .forms import RegistrationForm
+from django.core.mail import send_mail
+from django.conf import settings
+from .forms import RegistrationForm, ContatoForm
 from .decorators import role_required
 
 
@@ -22,6 +24,35 @@ class CustomLoginView(LoginView):
 
 def home(request):
     return render(request, 'loja/home.html')
+
+def contato(request):
+    if request.method == 'POST':
+        form = ContatoForm(request.POST)
+        if form.is_valid():
+            # Processar o formulário
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            
+            # Enviar email
+            try:
+                send_mail(
+                    f'Novo contato: {subject}',
+                    f'Nome: {name}\nEmail: {email}\nTelefone: {phone}\n\nMensagem:\n{message}',
+                    email,
+                    [settings.DEFAULT_FROM_EMAIL],
+                    fail_silently=False,
+                )
+                messages.success(request, 'Mensagem enviada com sucesso! Em breve entraremos em contato.')
+                return redirect('contato')
+            except Exception as e:
+                messages.error(request, 'Erro ao enviar mensagem. Tente novamente.')
+    else:
+        form = ContatoForm()
+    
+    return render(request, 'contato/contato.html', {'form': form})
 
 
 def register(request):

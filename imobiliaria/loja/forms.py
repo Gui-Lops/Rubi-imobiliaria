@@ -17,3 +17,11 @@ class RegistrationForm(UserCreationForm):
         if code and code != settings.ADMIN_REGISTRATION_CODE:
             raise forms.ValidationError('Código de admin inválido')
         return code
+
+
+class ContatoForm(forms.Form):
+    name = forms.CharField(max_length=100, required=True, label='Nome Completo')
+    email = forms.EmailField(required=True, label='E-mail')
+    phone = forms.CharField(max_length=20, required=True, label='Telefone')
+    subject = forms.CharField(max_length=200, required=True, label='Assunto')
+    message = forms.CharField(widget=forms.Textarea, required=True, label='Mensagem')

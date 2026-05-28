@@ -126,3 +126,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Simple admin registration code (change in production)
 ADMIN_REGISTRATION_CODE = 'SECRET_ADMIN_CODE'
+
+# Email Backend Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Use console backend for development
+DEFAULT_FROM_EMAIL = 'contato@rubihaus.com'

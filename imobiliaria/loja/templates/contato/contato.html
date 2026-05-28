@@ -1,0 +1,153 @@
+{% extends 'loja/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- HERO -->
+    <section class="hero">
+        <h2>Entre em Contato</h2>
+
+        <p>
+            Estamos prontos para ajudá-lo a encontrar o imóvel perfeito.
+            Entre em contato conosco!
+        </p>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section container">
+
+        <!-- LEFT -->
+        <div class="contact-info">
+
+            <div class="info-card">
+                <div class="icon-box">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+
+                <div>
+                    <h3>Telefone</h3>
+                    <p>(11) 99999-9999</p>
+                    <p>(11) 3333-3333</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-box">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div>
+                    <h3>E-mail</h3>
+                    <p>contato@rubihaus.com.br</p>
+                    <p>vendas@rubihaus.com.br</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-box">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div>
+                    <h3>Endereço</h3>
+                    <p>Av. Paulista, 1000</p>
+                    <p>Bela Vista, São Paulo - SP</p>
+                    <p>CEP: 01310-100</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-box">
+                    <i class="fa-regular fa-clock"></i>
+                </div>
+
+                <div>
+                    <h3>Horário de Atendimento</h3>
+                    <p>Segunda a Sexta: 9h às 18h</p>
+                    <p>Sábado: 9h às 13h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="contact-form">
+
+            <h3>Envie uma Mensagem</h3>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                            <small style="color: #dc2626;">{{ form.name.errors|join:", " }}</small>
+                        {% endif %}
+                    </div>
+
+                    <div class="input-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <small style="color: #dc2626;">{{ form.email.errors|join:", " }}</small>
+                        {% endif %}
+                    </div>
+
+                    <div class="input-group">
+                        {{ form.phone.label_tag }}
+                        {{ form.phone }}
+                        {% if form.phone.errors %}
+                            <small style="color: #dc2626;">{{ form.phone.errors|join:", " }}</small>
+                        {% endif %}
+                    </div>
+
+                    <div class="input-group">
+                        {{ form.subject.label_tag }}
+                        {{ form.subject }}
+                        {% if form.subject.errors %}
+                            <small style="color: #dc2626;">{{ form.subject.errors|join:", " }}</small>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    {{ form.message.label_tag }}
+                    {{ form.message }}
+                    {% if form.message.errors %}
+                        <small style="color: #dc2626;">{{ form.message.errors|join:", " }}</small>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fa-regular fa-paper-plane"></i>
+                    Enviar Mensagem
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- MAP -->
+    <section class="container">
+        <div class="map-box">
+
+            <div class="map-content">
+                <i class="fa-solid fa-location-dot"></i>
+
+                <h4>Mapa de localização</h4>
+
+                <p>Av. Paulista, 1000 - São Paulo, SP</p>
+            </div>
+
+        </div>
+    </section>
+
+
+{% endblock %}
