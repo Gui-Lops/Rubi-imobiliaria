@@ -12,24 +12,34 @@
         <div class="container header-inner">
             <a class="brand" href="/">RubiHaus</a>
             <nav class="site-nav">
-                <a href="#inicio">Início</a>
-                <a href="#imoveis">Imóveis</a>
-                <a href="#sobre">Sobre</a>
-                <a href="#contato">Contato</a>
+                <a href="#inicio" class="nav-anchor">Início</a>
+                <a href="#imoveis" class="nav-anchor">Imóveis</a>
+                <a href="#sobre" class="nav-anchor">Sobre</a>
+                <a href="#contato" class="nav-anchor">Contato</a>
             </nav>
-            {% if user.is_authenticated %}
-                <a class="btn btn-login" href="{% url 'profile' %}">{{ user.username }}</a>
-                <a class="btn btn-logout" href="{% url 'logout' %}">Sair</a>
-            {% else %}
-                <a class="btn btn-login" href="{% url 'login' %}">Login</a>
-            {% endif %}
+            <div class="header-auth">
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <a class="btn btn-admin" href="{% url 'admin_dashboard' %}">Admin</a>
+                    {% endif %}
+                    <a class="btn btn-profile" href="{% url 'profile' %}" title="Perfil de {{ user.username }}">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <a class="btn btn-logout" href="{% url 'logout' %}">Sair</a>
+                {% else %}
+                    <a class="btn btn-login" href="{% url 'login' %}">Login</a>
+                {% endif %}
+            </div>
         </div>
     </header>
 
     {% if messages %}
-        <div class="container" style="max-width:960px;margin:24px auto;">
+        <div class="message-toast-wrap">
             {% for message in messages %}
-                <div style="padding:14px 18px;margin-bottom:12px;border-radius:12px;background:#f8fafc;border:1px solid rgba(15,23,42,0.08);color:#0f172a;">{{ message }}</div>
+                <div class="message-toast {{ message.tags }}">{{ message }}</div>
             {% endfor %}
         </div>
     {% endif %}
@@ -41,5 +51,34 @@
             <p>© 2026 RubiHaus. Imóveis de alto padrão e luxo.</p>
         </div>
     </footer>
+
+    <script>
+        document.querySelectorAll('.nav-anchor').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                const anchor = href.substring(1);
+                
+                // Se não estamos na página inicial, redirecionar
+                if (window.location.pathname !== '/') {
+                    e.preventDefault();
+                    window.location.href = '/' + href;
+                } else {
+                    // Se estamos na página inicial, deixar o comportamento padrão
+                    const element = document.getElementById(anchor);
+                    if (element) {
+                        e.preventDefault();
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.message-toast').forEach((toast) => {
+            setTimeout(() => {
+                toast.classList.add('toast-hidden');
+                setTimeout(() => toast.remove(), 350);
+            }, 3200);
+        });
+    </script>
 </body>
 </html>

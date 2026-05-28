@@ -1,0 +1,85 @@
+{% extends 'loja/base.html' %}
+
+{% block content %}
+<section class="admin-page">
+    <div class="container" style="max-width:860px;margin:100px auto;">
+        <header class="section-header">
+            <p class="section-subtitle">Cadastro de imóvel</p>
+            <h1>{% if property_instance %}Editar imóvel{% else %}Novo imóvel{% endif %}</h1>
+            <p class="section-description">Informe os dados do imóvel e publique quando estiver pronto.</p>
+        </header>
+
+        <form method="post" enctype="multipart/form-data" class="auth-form">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="form-errors">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-row form-grid-two">
+                <div>
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div>
+                    {{ form.location.label_tag }}
+                    {{ form.location }}
+                </div>
+            </div>
+
+            <div class="form-row form-grid-two">
+                <div>
+                    {{ form.price.label_tag }}
+                    {{ form.price }}
+                </div>
+                <div>
+                    {{ form.property_type.label_tag }}
+                    {{ form.property_type }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+
+            <div class="form-row">
+                {{ form.images.label_tag }}
+                {{ form.images }}
+                {% if form.images.help_text %}
+                    <p class="field-note">{{ form.images.help_text }}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-row form-inline-checkbox">
+                <label class="checkbox-label">{{ form.is_published }} Publicar imediatamente</label>
+            </div>
+
+            {% if property_instance and property_instance.images.all %}
+                <div class="image-preview-panel">
+                    <h2>Imagens já enviadas</h2>
+                    <div class="image-preview-grid">
+                        {% for image in property_instance.images.all %}
+                            <div class="image-preview-item">
+                                <img src="{{ image.image.url }}" alt="Imagem do imóvel">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="form-actions">
+                <button class="btn-primary" type="submit">Salvar imóvel</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

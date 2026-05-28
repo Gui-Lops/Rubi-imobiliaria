@@ -1,19 +1,35 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.conf import settings
+
+from .models import Property
 
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    admin_code = forms.CharField(required=False, help_text='Preencha se for registro de admin', widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'admin_code')
+        fields = ('username', 'email', 'password1', 'password2')
 
-    def clean_admin_code(self):
-        code = self.cleaned_data.get('admin_code')
-        if code and code != settings.ADMIN_REGISTRATION_CODE:
-            raise forms.ValidationError('Código de admin inválido')
-        return code
+
+class MultiImageInput(forms.ClearableFileInput):
+    allow_multiple_selected = True
+
+
+class PropertyForm(forms.ModelForm):
+    images = forms.FileField(
+        required=False,
+        widget=MultiImageInput(attrs={'multiple': True}),
+        label='Imagens do imóvel',
+        help_text='Envie várias imagens para o imóvel, separadas por upload múltiplo.'
+    )
+
+    class Meta:
+        model = Property
+        fields = ('title', 'location', 'price', 'property_type', 'description', 'is_published')
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 5}),
+            'price': forms.NumberInput(attrs={'step': '0.01'}),
+            'property_type': forms.Select(),
+        }

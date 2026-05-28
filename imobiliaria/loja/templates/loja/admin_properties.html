@@ -1,0 +1,59 @@
+{% extends 'loja/base.html' %}
+
+{% block content %}
+<section class="admin-page">
+    <div class="container" style="max-width:1080px;margin:100px auto;">
+        <header class="section-header">
+            <p class="section-subtitle">Gestão de imóveis</p>
+            <h1>Cadastro de imóveis</h1>
+            <p class="section-description">Edite, publique ou exclua imóveis listados no site.</p>
+        </header>
+
+        <div class="admin-actions" style="margin-bottom: 28px;">
+            <a href="{% url 'admin_property_new' %}">Adicionar imóvel</a>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th>Localização</th>
+                    <th>Preço</th>
+                    <th>Status</th>
+                    <th>Imagens</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for property in properties %}
+                <tr>
+                    <td>{{ property.title }}</td>
+                    <td>{{ property.get_property_type_display }}</td>
+                    <td>{{ property.location }}</td>
+                    <td>R$ {{ property.price|floatformat:2 }}</td>
+                    <td>
+                        <span class="admin-badge {% if property.is_published %}published{% else %}draft{% endif %}">
+                            {% if property.is_published %}Publicado{% else %}Rascunho{% endif %}
+                        </span>
+                    </td>
+                    <td>{{ property.images.count }}</td>
+                    <td>
+                        <a href="{% url 'admin_property_edit' property.pk %}" class="btn btn-admin">Editar</a>
+                        <a href="{% url 'property_detail' property.pk %}" class="btn btn-admin">Ver</a>
+                        <form method="post" action="{% url 'admin_property_delete' property.pk %}" style="display:inline-flex; gap:10px;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-admin">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">Nenhum imóvel cadastrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

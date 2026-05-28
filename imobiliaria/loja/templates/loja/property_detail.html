@@ -1,0 +1,49 @@
+{% extends 'loja/base.html' %}
+
+{% block content %}
+<section class="property-detail-page">
+    <div class="container" style="max-width:1080px;margin:100px auto;padding:100px 0;">
+        <div class="property-detail-header">
+            <div>
+                <p class="section-subtitle">{{ property.get_property_type_display }}</p>
+                <h1>{{ property.title }}</h1>
+                <p class="section-description">{{ property.location }}</p>
+            </div>
+            <div class="property-detail-price">R$ {{ property.price|floatformat:2 }}</div>
+        </div>
+
+        <div class="property-gallery">
+            <div class="property-gallery-main">
+                {% if property.images.all %}
+                    <img src="{{ property.images.all.0.image.url }}" alt="Imagem principal do imóvel">
+                {% else %}
+                    <div class="property-gallery-placeholder">Nenhuma imagem disponível</div>
+                {% endif %}
+            </div>
+            <div class="property-gallery-thumbs">
+                {% for image in property.images.all %}
+                    <div class="property-thumb-item">
+                        <img src="{{ image.image.url }}" alt="Imagem do imóvel">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="property-detail-content">
+            <div class="property-detail-block">
+                <h2>Descrição</h2>
+                <p>{{ property.description|linebreaksbr }}</p>
+            </div>
+            <div class="property-detail-block property-detail-meta">
+                <h3>Informações do imóvel</h3>
+                <ul>
+                    <li><strong>Tipo:</strong> {{ property.get_property_type_display }}</li>
+                    <li><strong>Localização:</strong> {{ property.location }}</li>
+                    <li><strong>Publicado:</strong> {% if property.is_published %}Sim{% else %}Não{% endif %}</li>
+                    <li><strong>Imagens:</strong> {{ property.images.count }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
