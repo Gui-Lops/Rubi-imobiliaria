@@ -2,7 +2,17 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Property
+from .models import Property, PropertyImage
+
+
+class MultipleFileInput(forms.FileInput):
+    """Widget customizado para suportar múltiplos uploads"""
+    def __init__(self, attrs=None):
+        default_attrs = {'multiple': True}
+        if attrs:
+            default_attrs.update(attrs)
+        # Chamar o __init__ da classe base (Widget) diretamente, pulando FileInput
+        forms.Widget.__init__(self, default_attrs)
 
 
 class RegistrationForm(UserCreationForm):
@@ -61,14 +71,10 @@ class ContactForm(forms.Form):
     )
 
 
-class MultiImageInput(forms.ClearableFileInput):
-    allow_multiple_selected = True
-
-
 class PropertyForm(forms.ModelForm):
     images = forms.FileField(
         required=False,
-        widget=MultiImageInput(attrs={'multiple': True}),
+        widget=MultipleFileInput(),
         label='Imagens do imóvel',
         help_text='Envie várias imagens para o imóvel, separadas por upload múltiplo.'
     )
@@ -81,3 +87,7 @@ class PropertyForm(forms.ModelForm):
             'price': forms.NumberInput(attrs={'step': '0.01'}),
             'property_type': forms.Select(),
         }
+    
+    def clean_images(self):
+        """Validação para o campo images - pode ser ignorado pois não é do modelo"""
+        return self.cleaned_data.get('images')
