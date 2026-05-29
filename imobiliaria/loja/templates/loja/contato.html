@@ -1,0 +1,119 @@
+{% extends 'loja/base.html' %}
+
+{% block content %}
+<main class="contact-page">
+    <div class="container">
+        <div class="contact-page-grid">
+            <section class="contact-info">
+                <div class="contact-page-header">
+                    <p class="section-label">Entre em Contato</p>
+                    <h1>Estamos prontos para ajudá-lo a encontrar o imóvel perfeito</h1>
+                    <p>Entre em contato conosco e descubra como podemos ajudá-lo com informações, visitas e orçamentos personalizados.</p>
+                </div>
+
+                <div class="contact-info-cards">
+                    <article class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Telefone</h3>
+                            <p>(11) 99999-9999</p>
+                            <p>(11) 3333-3333</p>
+                        </div>
+                    </article>
+
+                    <article class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>E-mail</h3>
+                            <p>contato@rubihaus.com.br</p>
+                            <p>vendas@rubihaus.com.br</p>
+                        </div>
+                    </article>
+
+                    <article class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Endereço</h3>
+                            <p>Av. Paulista, 1000</p>
+                            <p>Bela Vista, São Paulo - SP</p>
+                            <p>CEP: 01310-100</p>
+                        </div>
+                    </article>
+
+                    <article class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Horário de Atendimento</h3>
+                            <p>Segunda a Sexta: 9h às 18h</p>
+                            <p>Sábado: 9h às 13h</p>
+                            <p>Domingo: Fechado</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="contact-form-panel">
+                <div class="contact-form-card">
+                    <h2>Envie uma Mensagem</h2>
+                    <form method="post" class="contact-form">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group">
+                                {{ contact_form.name.label_tag }}
+                                {{ contact_form.name }}
+                                <div class="field-error">{{ contact_form.name.errors }}</div>
+                            </div>
+                            <div class="form-group">
+                                {{ contact_form.email.label_tag }}
+                                {{ contact_form.email }}
+                                <div class="field-error">{{ contact_form.email.errors }}</div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                {{ contact_form.phone.label_tag }}
+                                {{ contact_form.phone }}
+                                <div class="field-error">{{ contact_form.phone.errors }}</div>
+                            </div>
+                            <div class="form-group">
+                                {{ contact_form.subject.label_tag }}
+                                {{ contact_form.subject }}
+                                <div class="field-error">{{ contact_form.subject.errors }}</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ contact_form.message.label_tag }}
+                            {{ contact_form.message }}
+                            <div class="field-error">{{ contact_form.message.errors }}</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary contact-submit">Enviar Mensagem</button>
+                        <p class="contact-note">* Campos obrigatórios</p>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+{% endblock %}

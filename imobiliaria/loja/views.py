@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.urls import reverse
-from .forms import RegistrationForm, PropertyForm
+from .forms import ContactForm, RegistrationForm, PropertyForm
 from .models import Property, PropertyImage
 from .decorators import role_required
 
@@ -27,6 +27,22 @@ class CustomLoginView(LoginView):
 
 def home(request):
     return render(request, 'loja/home.html')
+
+
+def contato(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            messages.success(request, 'Sua mensagem foi enviada com sucesso. Em breve entraremos em contato.')
+            return redirect('contato')
+    else:
+        form = ContactForm()
+
+    return render(request, 'loja/contato.html', {'contact_form': form})
+
+
+def sobre(request):
+    return render(request, 'loja/sobre.html')
 
 
 def register(request):

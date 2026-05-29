@@ -13,6 +13,54 @@ class RegistrationForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 
+class ContactForm(forms.Form):
+    SUBJECT_CHOICES = [
+        ('', 'Selecione o assunto'),
+        ('informacoes', 'Informações gerais'),
+        ('agendamento', 'Agendamento de visita'),
+        ('orcamento', 'Orçamento de imóvel'),
+        ('outros', 'Outros'),
+    ]
+
+    name = forms.CharField(
+        label='Nome Completo',
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Seu nome completo',
+            'class': 'input-field',
+        })
+    )
+    email = forms.EmailField(
+        label='E-mail',
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'seu@email.com',
+            'class': 'input-field',
+        })
+    )
+    phone = forms.CharField(
+        label='Telefone',
+        max_length=20,
+        widget=forms.TextInput(attrs={
+            'placeholder': '(11) 99999-9999',
+            'class': 'input-field',
+        })
+    )
+    subject = forms.ChoiceField(
+        label='Assunto',
+        choices=SUBJECT_CHOICES,
+        widget=forms.Select(attrs={'class': 'input-field'})
+    )
+    message = forms.CharField(
+        label='Mensagem',
+        required=False,
+        widget=forms.Textarea(attrs={
+            'placeholder': 'Conte-nos como podemos ajudá-lo...',
+            'rows': 6,
+            'class': 'input-field textarea-field',
+        })
+    )
+
+
 class MultiImageInput(forms.ClearableFileInput):
     allow_multiple_selected = True
 
