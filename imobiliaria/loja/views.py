@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import RegistrationForm, ContatoForm
+from .models import Property, PropertyImage
+
 from .decorators import role_required
 
 
@@ -29,14 +31,14 @@ def contato(request):
     if request.method == 'POST':
         form = ContatoForm(request.POST)
         if form.is_valid():
-            # Processar o formulário
+           
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
             
-            # Enviar email
+            
             try:
                 send_mail(
                     f'Novo contato: {subject}',
@@ -53,6 +55,10 @@ def contato(request):
         form = ContatoForm()
     
     return render(request, 'contato/contato.html', {'form': form})
+
+
+def sobre(request):
+    return render(request, 'loja/sobre.html')
 
 
 def register(request):
