@@ -1,5 +1,5 @@
 from django.db import models
-
+from .utils.watermark import aplicar_marca_dagua
 
 class Property(models.Model):
     PROPERTY_TYPE_CHOICES = [
@@ -32,9 +32,27 @@ class Property(models.Model):
 
 
 class PropertyImage(models.Model):
-    property = models.ForeignKey(Property, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='property_images/')
-    created_at = models.DateTimeField(auto_now_add=True)
+    property = models.ForeignKey(
+        Property,
+        related_name='images',
+        on_delete=models.CASCADE
+    )
+
+    image = models.ImageField(
+        upload_to='property_images/'
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
         return f"Imagem de {self.property.title}"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.image:
+            aplicar_marca_dagua(
+                self.image.path
+            )
