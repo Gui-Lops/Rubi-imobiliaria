@@ -10,7 +10,9 @@
 <body>
     <header class="site-header">
         <div class="container header-inner">
-            <a class="brand" href="/">RubiHaus</a>
+            <a class="brand" href="/" aria-label="RubiHaus">
+                <img src="{% static 'loja/img/rubihaus-logo.svg' %}" alt="RubiHaus" class="brand-logo">
+            </a>
             <nav class="site-nav">
                 <a href="#inicio" class="nav-anchor">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -81,7 +83,9 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section footer-brand">
-                    <h3 class="footer-logo">RubiHaus</h3>
+                    <h3 class="footer-logo">
+                        <img src="{% static 'loja/img/rubihaus-logo.svg' %}" alt="RubiHaus" class="footer-logo-img">
+                    </h3>
                     <p>Imóveis de qualidade com atendimento personalizado. Transformando sonhos em realidade.</p>
                 </div>
 

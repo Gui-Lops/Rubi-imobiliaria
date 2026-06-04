@@ -57,10 +57,24 @@ button,
 }
 
 .brand {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     flex-shrink: 0;
+}
+
+.brand-logo {
+    display: block;
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+}
+
+.footer-logo-img {
+    display: block;
+    width: 160px;
+    max-width: 100%;
+    height: auto;
 }
 
 .site-nav {

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="90" viewBox="0 0 340 90" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">RubiHaus</title>
+  <desc id="logoDesc">Logo RubiHaus com casa minimalista e diamante</desc>
+  <g fill="none" stroke="#7a1515" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 56 L22 26 L52 8 L82 26 L82 56" />
+    <path d="M22 56 H82" />
+    <path d="M44 56 V42 H60 V56" />
+  </g>
+  <g fill="none" stroke="#7a1515" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M52 -10 L40 10 L52 28 L64 10 Z" />
+    <path d="M40 10 L64 10" />
+    <path d="M52 -10 L52 28" />
+    <path d="M48 12 L56 12" />
+  </g>
+  <line x1="96" y1="8" x2="96" y2="68" stroke="#7a1515" stroke-width="2"/>
+  <text x="116" y="38" fill="#7a1515" font-family="Georgia, 'Times New Roman', serif" font-size="28" letter-spacing="6">RUBI</text>
+  <text x="116" y="68" fill="#7a1515" font-family="Georgia, 'Times New Roman', serif" font-size="28" letter-spacing="6">HAUS</text>
+</svg>
