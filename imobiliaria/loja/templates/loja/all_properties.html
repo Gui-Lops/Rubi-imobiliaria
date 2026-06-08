@@ -1,0 +1,36 @@
+{% extends 'loja/base.html' %}
+
+{% block content %}
+<section id="todos-imoveis" class="properties-page">
+    <div class="container" style="max-width: 1200px; margin: 100px auto; padding: 0 20px;">
+        <header class="section-header">
+            <p class="section-label">Catálogo Completo</p>
+            <h1>Todos os Imóveis Disponíveis</h1>
+            <p class="section-description">Explore nossa seleção completa de imóveis de qualidade</p>
+        </header>
+
+        <div class="cards-grid">
+            {% for property in properties %}
+            <article class="property-card">
+                <div class="thumb" style="background-image:url('{{ property.main_image_url }}')">
+                    {% if property.destaque %}<span class="badge">⭐ Destaque</span>{% endif %}
+                    <span class="category-pill">{{ property.get_property_type_display }}</span>
+                </div>
+                <div class="property-body">
+                    <div class="property-title">{{ property.title }}</div>
+                    <div class="property-meta">{{ property.location }}</div>
+                    <div class="property-price">R$ {{ property.price|floatformat:2 }}</div>
+                    <div class="property-cta">
+                        <a href="{% url 'property_detail' property.pk %}" class="btn-primary">Ver Detalhes</a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                <p style="color: var(--text-muted); font-size: 1.1rem;">Nenhum imóvel disponível no momento.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

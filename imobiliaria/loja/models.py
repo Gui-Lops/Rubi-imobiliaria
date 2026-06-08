@@ -17,6 +17,7 @@ class Property(models.Model):
     description = models.TextField(blank=True)
     image_url = models.URLField(blank=True, null=True)
     is_published = models.BooleanField(default=False)
+    destaque = models.BooleanField(default=False, help_text='Marque para exibir este imóvel na seção de destaques')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

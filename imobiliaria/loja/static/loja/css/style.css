@@ -65,16 +65,18 @@ button,
 
 .brand-logo {
     display: block;
-    width: 200px;
-    max-width: 100%;
-    height: auto;
+    width: auto;
+    max-width: 280px;
+    height: 50px;
+    max-height: 100%;
 }
 
 .footer-logo-img {
     display: block;
-    width: 160px;
-    max-width: 100%;
-    height: auto;
+    width: auto;
+    max-width: 280px;
+    height: 50px;
+    max-height: 100%;
 }
 
 .site-nav {
@@ -283,6 +285,34 @@ button,
 .admin-badge.draft {
     color: #475569;
     background: rgba(148, 163, 184, 0.16);
+}
+
+/* Alinhar botões da tabela admin */
+.admin-table td:last-child {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.admin-table td:last-child a,
+.admin-table td:last-child button {
+    padding: 8px 14px !important;
+    font-size: 0.85rem;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.admin-table td:last-child form {
+    display: inline-flex;
+    gap: 8px;
+    margin: 0;
+    align-items: center;
+}
+
+.admin-table td:last-child form button {
+    padding: 8px 14px !important;
+    font-size: 0.85rem;
 }
 
 @media (max-width: 860px) {
@@ -1152,13 +1182,21 @@ main {
 
 /* Featured cards */
 .cards-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; margin-top: 28px; }
-.property-card { background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 34px rgba(15,23,32,0.06); border: 1px solid rgba(15,23,32,0.04); }
-.property-card .thumb { height:190px; background-size:cover; background-position:center; position:relative; }
+.property-card { background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 34px rgba(15,23,32,0.06); border: 1px solid rgba(15,23,32,0.04); display: flex; flex-direction: column; height: 100%; }
+.property-card .thumb { height:190px; background-size:cover; background-position:center; position:relative; flex-shrink: 0; }
 .badge { position:absolute; top:12px; left:12px; background:var(--accent); color:#fff; padding:8px 12px; border-radius:999px; font-weight:700; font-size:0.85rem; }
 .category-pill { position:absolute; top:12px; right:12px; background: #f3f4f6; color:#111827; padding:8px 12px; border-radius:999px; font-weight:600; }
-.property-body { padding:18px 20px; }
+.property-body { padding:18px 20px; display: flex; flex-direction: column; flex: 1; }
 .property-title { font-weight:700; font-size:1.05rem; margin-bottom:8px; color:var(--text); }
-.property-meta { color:var(--text-muted); font-size:0.95rem; margin-bottom:12px; }
+.property-meta { color:var(--text-muted); font-size:0.95rem; margin-bottom:12px; flex: 1; }
+.property-price { font-weight:700; font-size:1.2rem; color:var(--accent); margin-bottom:12px; }
+.property-cta { margin-top: auto; }
+.property-cta .btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 16px;
+}
 
 /* Agent & QR */
 .agent-row { display:grid; grid-template-columns: 1fr 340px; gap:28px; align-items:start; margin-top:28px; }
@@ -1176,6 +1214,36 @@ main {
 @media (max-width: 900px) {
     .agent-row { grid-template-columns: 1fr; }
     .contact-pref-wrap { padding: 0 18px; }
+}
+
+/* Filtros Avançados - Hover interativo */
+.filter-card {
+    transition: all 0.25s ease;
+}
+
+.filter-card:hover {
+    transform: scale(1.04);
+}
+
+.filter-type-cards .filter-card {
+    cursor: pointer;
+}
+
+.filters-panel .input input,
+.filters-panel .input select {
+    transition: all 0.25s ease;
+}
+
+.filters-panel .input input:hover,
+.filters-panel .input select:hover {
+    border-color: var(--accent);
+    transform: scale(1.02);
+}
+
+.filters-panel .input input:focus,
+.filters-panel .input select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(222, 18, 18, 0.1);
 }
 
 /* Alternating section backgrounds */
@@ -1203,6 +1271,29 @@ main {
     border-radius: 24px;
     border: 1px solid rgba(15,23,32,0.05);
     margin-bottom: 24px;
+}
+.section-header {
+    margin-bottom: 36px;
+    text-align: center;
+}
+.section-label {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.section-header h1 {
+    font-size: clamp(2rem, 3vw, 3rem);
+    margin: 0 0 18px;
+    color: var(--text);
+}
+.section-description {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin: 0;
 }
 .contact-page-header .section-label {
     display: inline-block;

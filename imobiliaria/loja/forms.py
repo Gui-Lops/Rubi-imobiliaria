@@ -81,7 +81,7 @@ class PropertyForm(forms.ModelForm):
 
     class Meta:
         model = Property
-        fields = ('title', 'location', 'price', 'property_type', 'description', 'is_published')
+        fields = ('title', 'location', 'price', 'property_type', 'description', 'is_published', 'destaque')
         widgets = {
             'description': forms.Textarea(attrs={'rows': 5}),
             'price': forms.NumberInput(attrs={'step': '0.01'}),

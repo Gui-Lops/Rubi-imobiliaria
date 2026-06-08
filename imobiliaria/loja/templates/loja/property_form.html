@@ -63,6 +63,10 @@
                 <label class="checkbox-label">{{ form.is_published }} Publicar imediatamente</label>
             </div>
 
+            <div class="form-row form-inline-checkbox">
+                <label class="checkbox-label">{{ form.destaque }} Marcar como destaque</label>
+            </div>
+
             {% if property_instance and property_instance.images.all %}
                 <div class="image-preview-panel">
                     <h2>Imagens já enviadas</h2>

@@ -38,39 +38,25 @@
         <h2>Imóveis em destaque</h2>
         <p>Seleção exclusiva dos melhores imóveis disponíveis</p>
         <div class="cards-grid">
+            {% for property in featured_properties %}
             <article class="property-card">
-                <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80')">
-                    <span class="badge">⭐ Destaque</span>
-                    <span class="category-pill">Casa</span>
+                <div class="thumb" style="background-image:url('{{ property.main_image_url }}')">
+                    {% if property.destaque %}<span class="badge">⭐ Destaque</span>{% endif %}
+                    <span class="category-pill">{{ property.get_property_type_display }}</span>
                 </div>
                 <div class="property-body">
-                    <div class="property-title">Casa Moderna em Condomínio Fechado</div>
-                    <div class="property-meta">Alphaville, Barueri - SP</div>
-                    <div class="property-cta"><button class="btn-primary">Faça login para visualizar o preço</button></div>
+                    <div class="property-title">{{ property.title }}</div>
+                    <div class="property-meta">{{ property.location }}</div>
+                    <div class="property-price">R$ {{ property.price|floatformat:2 }}</div>
+                    <div class="property-cta"><a href="{% url 'property_detail' property.pk %}" class="btn-primary">Ver detalhes</a></div>
                 </div>
             </article>
-            <article class="property-card">
-                <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1560185127-6b4d1f3be3c5?auto=format&fit=crop&w=1200&q=80')">
-                    <span class="badge">⭐ Destaque</span>
-                    <span class="category-pill">Apartamento</span>
-                </div>
-                <div class="property-body">
-                    <div class="property-title">Apartamento de Luxo com Vista Panorâmica</div>
-                    <div class="property-meta">Moema, São Paulo - SP</div>
-                    <div class="property-cta"><button class="btn-primary">Faça login para visualizar o preço</button></div>
-                </div>
-            </article>
-            <article class="property-card">
-                <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80')">
-                    <span class="badge">⭐ Destaque</span>
-                    <span class="category-pill">Cobertura</span>
-                </div>
-                <div class="property-body">
-                    <div class="property-title">Cobertura Duplex Premium</div>
-                    <div class="property-meta">Jardins, São Paulo - SP</div>
-                    <div class="property-cta"><button class="btn-primary">Faça login para visualizar o preço</button></div>
-                </div>
-            </article>
+            {% empty %}
+            <p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">Nenhum imóvel disponível no momento.</p>
+            {% endfor %}
+        </div>
+        <div style="text-align: center; margin-top: 48px;">
+            <a href="{% url 'all_properties' %}" class="btn btn-primary">Ver Mais Imóveis</a>
         </div>
     </div>
 </section>

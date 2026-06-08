@@ -26,7 +26,16 @@ class CustomLoginView(LoginView):
 
 
 def home(request):
-    return render(request, 'loja/home.html')
+    # Buscar imóveis marcados como destaque
+    featured_properties = Property.objects.filter(destaque=True, is_published=True).order_by('-created_at')
+    
+    # Se não houver destaques, usar os imóveis mais recentes
+    if not featured_properties.exists():
+        featured_properties = Property.objects.filter(is_published=True).order_by('-created_at')[:3]
+
+    return render(request, 'loja/home.html', {
+        'featured_properties': featured_properties
+    })
 
 
 def contato(request):
@@ -142,6 +151,15 @@ def property_detail(request, pk):
     property_instance = get_object_or_404(Property, pk=pk)
     return render(request, 'loja/property_detail.html', {
         'property': property_instance,
+    })
+
+
+def all_properties(request):
+    # Buscar todos os imóveis publicados, ordenado por mais recentes
+    properties = Property.objects.filter(is_published=True).order_by('-created_at')
+    
+    return render(request, 'loja/all_properties.html', {
+        'properties': properties
     })
 
 

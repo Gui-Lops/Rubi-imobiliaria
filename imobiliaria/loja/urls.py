@@ -15,5 +15,6 @@ urlpatterns = [
     path('admin-dashboard/properties/new/', views.admin_property_form, name='admin_property_new'),
     path('admin-dashboard/properties/<int:pk>/edit/', views.admin_property_form, name='admin_property_edit'),
     path('admin-dashboard/properties/<int:pk>/delete/', views.admin_property_delete, name='admin_property_delete'),
+    path('imoveis/', views.all_properties, name='all_properties'),
     path('propriedades/<int:pk>/', views.property_detail, name='property_detail'),
 ]
